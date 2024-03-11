@@ -8,12 +8,6 @@ namespace LsoAPI
     {
         public SongMappingProfile() 
         {
-            //CreateMap<CreateSongDto, Song>()
-            //    .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Title))
-            //    .ForMember(dest => dest.LinesNumber, opt => opt.MapFrom(src => src.Lyrics.Count));
-            //.ForMember(dest => dest.Lines, opt => opt.MapFrom(src => src.Lyrics));
-            //.Select(lyric => new Line { Content = lyric.Content})));
-
             CreateMap<CreateSongDto, Song>()
                 .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Title))
                 .ForMember(dest => dest.LinesNumber, opt => opt.MapFrom(src => src.Lyrics.Count))
