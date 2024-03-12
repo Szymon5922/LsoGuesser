@@ -22,21 +22,19 @@ namespace LsoAPI.Controllers
             IEnumerable<SongDto>? songs = _lsoService.GetAll();
             return Ok(songs);
         }
-        [HttpGet("{id}")]
+        [HttpGet("GetSong/{id}")]
         public ActionResult<SongDto> GetSong(int id)
         {
             SongDto song = _lsoService.GetById(id);
             return song != null ? Ok(song) : NotFound();
         }
-        [Route("RandomSong/{stt?}")]
-        [HttpGet("{stt?}")]
+        [HttpGet("RandomSong/{stt?}")]
         public ActionResult<SongGuessDto> GetRandomSongGuess([FromRoute] int stt=4)
         {
             SongGuessDto data = _lsoService.GetRandomSongGuessData(stt);
             return Ok(data);
         }
-        [Route("RandomLine/{stt?}")]
-        [HttpGet("{stt?}")]
+        [HttpGet("RandomLine/{stt?}")]
         public ActionResult<LineGuessDto> GetRandomLineGuess([FromRoute]int stt=4)
         {
             LineGuessDto data = _lsoService.GetRandomLineGuessData(stt);
