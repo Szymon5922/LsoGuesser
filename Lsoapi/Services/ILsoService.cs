@@ -5,6 +5,7 @@ namespace LsoAPI.Services
     public interface ILsoService
     {
         IEnumerable<SongDto> GetAll();
+        SongDto GetRandom();
         SongDto GetById(int id);
         SongGuessDto GetRandomSongGuessData(int songsToTake);
         LineGuessDto GetRandomLineGuessData(int songsToTake);

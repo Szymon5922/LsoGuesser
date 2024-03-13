@@ -35,6 +35,17 @@ namespace LsoAPI.Services
             _dbContext.SaveChanges();
             return true;
         }
+        public SongDto GetRandom()
+        {
+            Song song = _dbContext.Songs
+                .Include(t => t.Lines)
+                .OrderBy(r => Guid.NewGuid())
+                .First();
+
+            var songDto = _mapper.Map<SongDto>(song);
+
+            return songDto;
+        }
 
         public IEnumerable<SongDto> GetAll()
         {
