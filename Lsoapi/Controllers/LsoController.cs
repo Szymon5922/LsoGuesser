@@ -15,8 +15,13 @@ namespace LsoAPI.Controllers
         {
             _lsoService = service;
         }
-
         [HttpGet]
+        public ActionResult<SongDto> GetRandomSong() 
+        {
+            SongDto song = _lsoService.GetRandom();
+            return Ok(song);
+        }
+        [HttpGet("GetAll")]
         public ActionResult<IEnumerable<SongDto>> GetAll()
         {
             IEnumerable<SongDto>? songs = _lsoService.GetAll();
