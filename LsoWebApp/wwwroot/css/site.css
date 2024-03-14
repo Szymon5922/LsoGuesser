@@ -1,4 +1,4 @@
-html {
+﻿html {
   font-size: 14px;
 }
 
@@ -18,5 +18,38 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    background-color: #200D26;
+    font-family: "Frijole", system-ui;
+    color: white;
+    display:flex;
+    flex-direction:column;
+    height:100vh;
 }
+
+.nav-link {
+    font-family: "Monofett", monospace;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 2rem;    
+    margin-left:0.75rem;
+    transition:all ease-in-out 0.2s;
+}
+
+.nav-link:hover {
+    text-shadow: -10px -5px 30px rgba(90, 24, 227, 1);
+    transform:scale(1.1);
+}
+
+.navbar-brand img{
+    max-width:70px;
+    margin:0;
+}
+.container-main{
+    flex:1;
+    overflow-y:hidden;
+    margin-bottom:60px;
+}
+main{
+    height:100%;
+}
+
