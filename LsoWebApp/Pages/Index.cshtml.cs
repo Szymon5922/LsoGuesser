@@ -14,11 +14,19 @@ namespace LsoWebApp.Pages
         }
 
         [BindProperty]
-        public IEnumerable<SongModel> SongModels {get;set;}
+        public SongModel SongModel {get;set;}
 
         public async Task OnGet()
         {
-            
+            var httpClient = _httpClientFactory.CreateClient("LsoApi");
+
+            using HttpResponseMessage responseMessage = await httpClient.GetAsync("");
+
+            if(responseMessage.IsSuccessStatusCode) 
+            {
+                using var contentStream = await responseMessage.Content.ReadAsStreamAsync();
+                SongModel = await JsonSerializer.DeserializeAsync<SongModel>(contentStream);
+            }
         }
     }
 }

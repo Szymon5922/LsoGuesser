@@ -2,6 +2,13 @@
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
+
+    if(Model.ModelState.IsValid)
+    {
+        Random random = new Random();
+        int toSkip = random.Next(Model.SongModel.lines.Count - 2);
+        Model.SongModel.lines = Model.SongModel.lines.Skip(toSkip).Take(2).ToList();
+    }
 }
 
 <head>
@@ -16,7 +23,9 @@
             </div>
             <div class="random-quote">
                 <p>Cytat dla Ciebie:</p>
-                <p class="quote">"Lorem ipsum dolor sit amet"</p>
+                <p class="quote">"@Model.SongModel.lines[0]</p>
+                <p class="quote">@Model.SongModel.lines[1]"</p>
+                <p>~@Model.SongModel.title</p>
             </div>            
         </div>
         <div class="col-md-3 photos">
