@@ -4,18 +4,36 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<head>
+    <link rel="stylesheet" href="~/css/index.css">
+</head>
 
-    @foreach(var song in Model.SongModels)
-    {
-        <div class="m-3">
-        <h3 style="text-decoration:underline">@song.title</h3>
-        @foreach(string line in song.lines)
-        {
-            <p>@line</p>        
-        }
+<div class="container">
+    <div class="row">
+        <div class="col-md-5 p-5 mt-5">
+            <div class="title">
+                <h1>Liryka<br />Skladu<br />Ostródzkiego</h1>
+            </div>
+            <div class="random-quote">
+                <p>Cytat dla Ciebie:</p>
+                <p class="quote">"Lorem ipsum dolor sit amet"</p>
+            </div>            
         </div>
-    }
+        <div class="col-md-3 photos">
+            <div class="flex-container">
+                <div id="item-1" class="grid-item pb-1">
+                </div>
+                <div id="item-2" class="grid-item pe-2">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 photos">
+            <div class="flex-container">
+                <div id="item-3" class="grid-item ps-1">
+                </div>
+                <div id="item-4" class="grid-item pt-1">
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
