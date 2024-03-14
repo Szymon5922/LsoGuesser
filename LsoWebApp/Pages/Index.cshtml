@@ -1,0 +1,39 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<head>
+    <link rel="stylesheet" href="~/css/index.css">
+</head>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-5 p-5 mt-5">
+            <div class="title">
+                <h1>Liryka<br />Skladu<br />Ostródzkiego</h1>
+            </div>
+            <div class="random-quote">
+                <p>Cytat dla Ciebie:</p>
+                <p class="quote">"Lorem ipsum dolor sit amet"</p>
+            </div>            
+        </div>
+        <div class="col-md-3 photos">
+            <div class="flex-container">
+                <div id="item-1" class="grid-item pb-1">
+                </div>
+                <div id="item-2" class="grid-item pe-2">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 photos">
+            <div class="flex-container">
+                <div id="item-3" class="grid-item ps-1">
+                </div>
+                <div id="item-4" class="grid-item pt-1">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
