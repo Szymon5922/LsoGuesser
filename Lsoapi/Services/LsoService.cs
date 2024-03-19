@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using LsoAPI.Entities;
 using LsoAPI.Models;
-using LsoAPI.Helpers;
+using LsoAPI.GuessSets;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 
@@ -61,43 +61,20 @@ namespace LsoAPI.Services
             Song? song = _dbContext.Songs
                 .Include(p => p.Lines)
                 .FirstOrDefault(p => p.Id == id);
-            //return _mapper.Map<SongDto>(song) ?? throw new Exception("Not found");
             return _mapper.Map<SongDto>(song);
         }
 
-        public LineGuessDto GetRandomLineGuessData(int songsToTake)
+        public GuessSet GetRandomLineGuessData(int songsToTake)
         {
-            GuessSet guessSet = new GuessSet(songsToTake, _dbContext);
-            List<string> falseLines = new();
-            foreach(int songId in guessSet.FalseSet)
-            {
-                falseLines.Add(guessSet.GetRandLine(songId));
-            }
-            LineGuessDto lineGuessDto = new LineGuessDto()
-            {
-                Song = guessSet.CorrectSong.Title,
-                FalseLines = falseLines,
-                RightLine = guessSet.GetRandLine(guessSet.CorrectSong)
-            };
-
-            return lineGuessDto;
+            GuessSet guessSet = new GuessLineData(songsToTake, _dbContext);            
+            return guessSet;
 
         }
 
-        public SongGuessDto GetRandomSongGuessData(int songsToTake)
+        public GuessSet GetRandomSongGuessData(int songsToTake)
         {
-            GuessSet guessSet = new GuessSet(songsToTake,_dbContext);
-            
-            List<string> falseSongsTitles = _dbContext.Songs
-                .Where(p => guessSet.FalseSet.Contains(p.Id))
-                .Select(x =>x.Title)
-                .ToList();
-
-            SongGuessDto songGuessData = new SongGuessDto(guessSet.CorrectSong.Title
-                ,falseSongsTitles
-                ,guessSet.GetRandLine(guessSet.CorrectSong));
-
-            return songGuessData;
+            GuessSet guessSet = new GuessSongData(songsToTake,_dbContext);
+            return guessSet;
         }
 
         public void Update(int id, CreateSongDto song)

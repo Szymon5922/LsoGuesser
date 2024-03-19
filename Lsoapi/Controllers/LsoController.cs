@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using LsoAPI.Services;
 using LsoAPI.Entities;
+using LsoAPI.GuessSets;
 using LsoAPI.Models;
 
 namespace LsoAPI.Controllers
@@ -34,15 +35,15 @@ namespace LsoAPI.Controllers
             return song != null ? Ok(song) : NotFound();
         }
         [HttpGet("RandomSong/{stt?}")]
-        public ActionResult<SongGuessDto> GetRandomSongGuess([FromRoute] int stt=4)
-        {
-            SongGuessDto data = _lsoService.GetRandomSongGuessData(stt);
+        public ActionResult<GuessSet> GetRandomSongGuess([FromRoute] int stt=4)
+        {            
+            GuessSet data = _lsoService.GetRandomSongGuessData(stt);
             return Ok(data);
         }
         [HttpGet("RandomLine/{stt?}")]
-        public ActionResult<LineGuessDto> GetRandomLineGuess([FromRoute]int stt=4)
+        public ActionResult<GuessSet> GetRandomLineGuess([FromRoute]int stt=4)
         {
-            LineGuessDto data = _lsoService.GetRandomLineGuessData(stt);
+            GuessSet data = _lsoService.GetRandomLineGuessData(stt);
             return Ok(data);
         }
         [HttpPost]
