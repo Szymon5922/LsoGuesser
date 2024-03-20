@@ -1,8 +1,12 @@
-﻿namespace LsoWebApp.Models
+﻿using System.Text.Json.Serialization;
+
+namespace LsoWebApp.Models
 {
     public class SongModel
     {
-        public string title { get; set; }
-        public List<string> lines { get; set; }
+        [JsonPropertyName("title")]
+        public string Title { get; set; }
+        [JsonPropertyName("lines")]
+        public List<string> Lines { get; set; }
     }
 }
