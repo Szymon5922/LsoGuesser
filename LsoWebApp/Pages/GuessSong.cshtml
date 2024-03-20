@@ -1,0 +1,13 @@
+﻿@page
+@model GuessSongModel
+@{
+}
+
+<p>
+    @Model.GuessSet.Question;
+</p>
+@foreach(string f in Model.GuessSet.False)
+{
+    <p>@f</p>
+}
+<p>@Model.GuessSet.Correct</p>
