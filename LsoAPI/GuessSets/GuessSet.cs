@@ -36,14 +36,14 @@ namespace LsoAPI.GuessSets
 
             _falseSongsIds = randSet.ToList();
 
-            SetQuestion();
-            SetAnswer();
-            SetFalseSet();
+            _question = SetQuestion();
+            _correct = SetAnswer();
+            _falseSet = SetFalseSet();
         }
 
-        protected abstract void SetFalseSet();
-        protected abstract void SetAnswer();
-        protected abstract void SetQuestion();
+        protected abstract string SetQuestion();
+        protected abstract string SetAnswer();
+        protected abstract List<string> SetFalseSet();
         public string GetRandLine(Song song)
         {
             int randLineNo = GetRand(song.LinesNumber);
