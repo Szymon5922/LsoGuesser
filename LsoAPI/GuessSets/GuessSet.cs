@@ -1,4 +1,6 @@
 ﻿using LsoAPI.Entities;
+using LsoAPI.Extensions;
+using LsoAPI.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace LsoAPI.GuessSets
@@ -11,11 +13,10 @@ namespace LsoAPI.GuessSets
         protected Song _correctSong;
         protected string _correct;
         protected List<int> _falseSongsIds;
-        protected List<string> _falseSet;
+        protected List<AnswerDto> _answers;
         protected string _question;
         public string Question => _question;
-        public string Correct => _correct;
-        public List<string> FalseSet => _falseSet;
+        public List<AnswerDto> Answers => _answers;
         public int GetRand(int to) => _random.Next(1,to);
         
         public GuessSet(int songsCountExpected, LsoDbContext dbContext)
@@ -37,13 +38,13 @@ namespace LsoAPI.GuessSets
             _falseSongsIds = randSet.ToList();
 
             _question = SetQuestion();
-            _correct = SetAnswer();
-            _falseSet = SetFalseSet();
+            _answers = SetAnswers();
+
+            _answers.Shuffle();
         }
 
         protected abstract string SetQuestion();
-        protected abstract string SetAnswer();
-        protected abstract List<string> SetFalseSet();
+        protected abstract List<AnswerDto> SetAnswers();
         public string GetRandLine(Song song)
         {
             int randLineNo = GetRand(song.LinesNumber);
