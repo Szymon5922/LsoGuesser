@@ -5,25 +5,17 @@ namespace LsoAPI.GuessSets
     public class GuessLineData : GuessSet
     {
         public GuessLineData(int songsCountExpected, LsoDbContext dbContext) : base(songsCountExpected, dbContext)
-        {
-        }
-
-        protected override void SetQuestion()
-        {
-            _question = _correctSong.Title;
-        }
-        protected override void SetAnswer()
-        {
-            _correct = GetRandLine(_correctSong);
-        }
-        protected override void SetFalseSet()
+        {}
+        protected override string SetQuestion() => _correctSong.Title;        
+        protected override string SetAnswer() => GetRandLine(_correctSong);        
+        protected override List<string> SetFalseSet()
         {
             List<string> verses = new();
             foreach(int id in _falseSongsIds) 
             {
                 verses.Add(GetRandLine(id));
             }
-            _falseSet = verses;
+            return verses;
         }
     }
 }
