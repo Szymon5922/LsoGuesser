@@ -8,12 +8,15 @@ namespace LsoWebApp.Pages
     public class GuessSongModel : PageModel
     {
         private readonly IHttpClientFactory _httpClientFactory;
+        private GuessSetModel _guessSetModel;
         public GuessSongModel(IHttpClientFactory httpClientFactory)
         {
             _httpClientFactory = httpClientFactory;
         }
         [BindProperty]
-        public GuessSetModel GuessSet { get; set; }
+        public List<(string,bool)> Answers => _guessSetModel.Answers;
+        [BindProperty]
+        public string Question => _guessSetModel.Question;
 
         public async Task OnGet()
         {
@@ -24,7 +27,7 @@ namespace LsoWebApp.Pages
             if(responseMessage.IsSuccessStatusCode)
             {
                 using var contentStream = await responseMessage.Content.ReadAsStreamAsync();
-                GuessSet = await JsonSerializer.DeserializeAsync<GuessSetModel>(contentStream);
+                _guessSetModel = await JsonSerializer.DeserializeAsync<GuessSetModel>(contentStream);
             }
         }
     }

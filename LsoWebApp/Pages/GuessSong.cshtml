@@ -4,10 +4,9 @@
 }
 
 <p>
-    @Model.GuessSet.Question;
+    @Model.Question;
 </p>
-@foreach(string f in Model.GuessSet.False)
+@foreach(var answer in Model.Answers)
 {
-    <p>@f</p>
+    <p>@answer.Item1 : @answer.Item2.ToString()</p>
 }
-<p>@Model.GuessSet.Correct</p>
