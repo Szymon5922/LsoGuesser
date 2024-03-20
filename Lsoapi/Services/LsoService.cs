@@ -68,7 +68,6 @@ namespace LsoAPI.Services
         {
             GuessSet guessSet = new GuessLineData(songsToTake, _dbContext);            
             return guessSet;
-
         }
 
         public GuessSet GetRandomSongGuessData(int songsToTake)

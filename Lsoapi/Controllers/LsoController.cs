@@ -34,13 +34,13 @@ namespace LsoAPI.Controllers
             SongDto song = _lsoService.GetById(id);
             return song != null ? Ok(song) : NotFound();
         }
-        [HttpGet("RandomSong/{stt?}")]
+        [HttpGet("SongGuess/{stt?}")]
         public ActionResult<GuessSet> GetRandomSongGuess([FromRoute] int stt=4)
         {            
             GuessSet data = _lsoService.GetRandomSongGuessData(stt);
             return Ok(data);
         }
-        [HttpGet("RandomLine/{stt?}")]
+        [HttpGet("LineGuess/{stt?}")]
         public ActionResult<GuessSet> GetRandomLineGuess([FromRoute]int stt=4)
         {
             GuessSet data = _lsoService.GetRandomLineGuessData(stt);
