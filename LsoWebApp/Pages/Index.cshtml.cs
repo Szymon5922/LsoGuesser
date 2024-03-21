@@ -16,7 +16,7 @@ namespace LsoWebApp.Pages
         }
 
         [BindProperty]
-        public string[] Quote => GetQuote(_songModel);
+        public string[] Quote { get; set; }
         [BindProperty]
         public string Title  => _songModel.Title;
         public async Task OnGet()
@@ -30,6 +30,8 @@ namespace LsoWebApp.Pages
                 using var contentStream = await responseMessage.Content.ReadAsStreamAsync();
                 _songModel = await JsonSerializer.DeserializeAsync<SongModel>(contentStream);
             }
+
+            Quote = GetQuote(_songModel);
         }
         private string[] GetQuote(SongModel songModel)
         {

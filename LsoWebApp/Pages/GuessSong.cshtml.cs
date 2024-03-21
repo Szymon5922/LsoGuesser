@@ -14,9 +14,11 @@ namespace LsoWebApp.Pages
             _httpClientFactory = httpClientFactory;
         }
         [BindProperty]
-        public List<(string,bool)> Answers => _guessSetModel.Answers;
+        public List<AnswerModel> Answers => _guessSetModel.Answers;
         [BindProperty]
         public string Question => _guessSetModel.Question;
+        [BindProperty]
+        public string CorrectTitle => Answers.First(a => a.IsCorrect == true).Text;
 
         public async Task OnGet()
         {
