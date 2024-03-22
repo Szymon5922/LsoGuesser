@@ -1,0 +1,145 @@
+﻿@page
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+
+@model GuessLineModel
+
+<style>
+    .answer-btn, .question, .response {
+        display: none;
+        font-family: "Hanalei Fill", system-ui;
+        font-weight: 400;
+        font-style: normal;
+        transition: background-color ease-in-out 0.75s;
+    }
+
+    .question {
+        font-size: 2rem;
+    }
+
+    .answer-btn {
+        min-width: 10rem;
+        margin: 10px;
+        padding: 2px;
+        border-radius: 5px;
+        opacity: 0.75;
+    }
+
+        .answer-btn:hover {
+            opacity: 1;
+        }
+
+    .loaded {
+        display: block;
+    }
+
+    .incorrect {
+        background-color: red;
+    }
+
+    .correct {
+        background-color: green;
+    }
+
+    .selected {
+        border: solid 2.5px grey;
+        padding: 0;
+        opacity: 1;
+    }
+
+    .response {
+        font-size: 2rem;
+    }
+
+
+</style>
+
+<div class="question text-center m-5 justify-content-center">
+    Który wers pochodzi z piosenki: "@Model.GuessSetModel.Question"?
+</div>
+<div class="row justify-content-center">
+    @foreach (var answer in Model.GuessSetModel.Answers)
+    {
+        <div class="col">
+            <button class="answer-btn" data-is-correct="@answer.IsCorrect.ToString().ToLower()">@answer.Text</button>
+        </div>
+    }
+</div>
+<div class="row response justify-content-center">
+    <div class="col text-center p-2">
+        <p class="message"></p>
+        <p>Prawidłowy wers to: "@Model.CorrectVerse"</p>
+        @if (Model.GuessSetModel.ViedoUrl != null)
+        {
+            <div class="video m-5">
+                <iframe src="@Model.GuessSetModel.ViedoUrl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+        }
+        <button class="btn btn-secondary again">Jeszcze raz</button>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        var buttons = $(".answer-btn");
+
+        $(".question").fadeIn("slow");
+
+        $("document").ready(function () {
+            buttons.each(function (index) {
+                var button = $(this);
+                setTimeout(function () {
+                    button.fadeIn("slow");
+                }, 750 * index);
+            });
+        });
+
+        $(".answer-btn").click(ButtonCallback)
+
+        $(".again").click(function () {
+            location.reload();
+        })
+
+        var clicked = false;
+        var correctChoice = false;
+        var responsemessage = "";
+
+        function ButtonCallback() {
+            if (!clicked) {
+                if ($(this).data("is-correct")) {
+                    correctChoice = true;
+                } else {
+                    correctChoice = false;
+                }
+
+                buttons.each(function () {
+                    if ($(this).data("is-correct")) {
+                        $(this).addClass("correct");
+                    }
+                    else {
+                        $(this).addClass("incorrect");
+                    }
+
+                })
+                $(this).addClass("selected");
+
+                setTimeout(function () {
+                    if (correctChoice) {
+                        responsemessage = "Dobrze!"
+                    }
+                    else {
+                        responsemessage = "Niestety nie"
+                    }
+                    $(".message").text(responsemessage);
+                    $(".response").fadeIn("slow");
+                }, 2000)
+
+                clicked = true;
+            }
+        }
+
+
+
+    </script>
+}
