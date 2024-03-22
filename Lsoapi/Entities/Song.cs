@@ -10,5 +10,6 @@ namespace LsoAPI.Entities
         public string Title { get; set; }
         public int LinesNumber { get; set; }
         public virtual List<Line> Lines { get; set; }
+        public string? VideoUrl { get; set; }
     }
 }

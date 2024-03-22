@@ -1,5 +1,4 @@
 ﻿using System.Text.Json.Serialization;
-using LsoWebApp.Extensions;
 
 namespace LsoWebApp.Models
 {
@@ -9,6 +8,8 @@ namespace LsoWebApp.Models
         public string Question { get; set; }
         [JsonPropertyName("answers")]
         public List<AnswerModel> Answers { get; set; }
+        [JsonPropertyName("videoUrl")]
+        public string? ViedoUrl { get; set; }
 
     }
 }

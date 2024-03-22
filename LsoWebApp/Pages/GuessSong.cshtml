@@ -49,10 +49,10 @@
 </style>
 
 <div class="question text-center m-5 justify-content-center">
-    Z jakiej piosenki pochodzi wers: "@Model.Question"?
+    Z jakiej piosenki pochodzi wers: "@Model.GuessSetModel.Question"?
 </div>
 <div class="row justify-content-center">
-    @foreach(var answer in Model.Answers)
+    @foreach (var answer in Model.GuessSetModel.Answers)
     {
         <div class="col">
             <button class="answer-btn" data-is-correct="@answer.IsCorrect.ToString().ToLower()">@answer.Text</button>
@@ -63,9 +63,12 @@
     <div class="col text-center p-2">
         <p class="message"></p>
         <p>Prawidłowy tytuł to: "@Model.CorrectTitle"</p>
-        <div class="video m-5">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/VcV8U9LGFhk?si=TwwIloGKd-TG2fjv" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        @if (Model.GuessSetModel.ViedoUrl != null)
+        {
+            <div class="video m-5">
+                <iframe width="560" height="315" src="@Model.GuessSetModel.ViedoUrl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>
+        }
         <button class="btn btn-secondary again">Jeszcze raz</button>
     </div>
 </div>
