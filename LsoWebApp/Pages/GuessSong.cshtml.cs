@@ -13,7 +13,11 @@ namespace LsoWebApp.Pages
             _httpClientFactory = httpClientFactory;
         }
         [BindProperty]
-        public GuessSetModel GuessSet { get; set; }
+        public GuessSetModel GuessSetModel { get; set; }
+        
+        [BindProperty]
+        public string CorrectTitle => GuessSetModel.Answers.First(a => a.IsCorrect == true).Text;
+        
 
         public async Task OnGet()
         {
@@ -24,7 +28,7 @@ namespace LsoWebApp.Pages
             if(responseMessage.IsSuccessStatusCode)
             {
                 using var contentStream = await responseMessage.Content.ReadAsStreamAsync();
-                GuessSet = await JsonSerializer.DeserializeAsync<GuessSetModel>(contentStream);
+                GuessSetModel = await JsonSerializer.DeserializeAsync<GuessSetModel>(contentStream);
             }
         }
     }

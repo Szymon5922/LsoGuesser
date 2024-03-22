@@ -17,6 +17,7 @@ namespace LsoAPI.GuessSets
         protected string _question;
         public string Question => _question;
         public List<AnswerDto> Answers => _answers;
+        public string? VideoUrl => _correctSong.VideoUrl;
         public int GetRand(int to) => _random.Next(1,to);
         
         public GuessSet(int songsCountExpected, LsoDbContext dbContext)

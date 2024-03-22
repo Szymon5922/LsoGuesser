@@ -6,9 +6,10 @@ namespace LsoWebApp.Models
     {
         [JsonPropertyName("question")]
         public string Question { get; set; }
-        [JsonPropertyName("correct")]
-        public string Correct { get; set; }
-        [JsonPropertyName("falseSet")]
-        public List<string> False { get; set; }
+        [JsonPropertyName("answers")]
+        public List<AnswerModel> Answers { get; set; }
+        [JsonPropertyName("videoUrl")]
+        public string? ViedoUrl { get; set; }
+
     }
 }

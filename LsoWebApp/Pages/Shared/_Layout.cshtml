@@ -13,9 +13,9 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-black border-bottom box-shadow">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark border-bottom box-shadow">
             <div class="container">
-                <a class="navbar-brand pe-5" href="https://syberianova.pl/" target="_blank"><img src="img/tdw.jpg" /></a>
+                <a class="navbar-brand pe-5" asp-page="/Index"><img src="img/tdw.png" /></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -23,13 +23,13 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-page="/Index">Zgaduj wers</a>
+                            <a class="nav-link text-light" asp-area="" asp-page="/GuessLine">Zgaduj wers</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-page="/GuessSong">Zgaduj piosenkę</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link disabled text-muted" asp-area="" asp-page="/Privacy">Zgaduj lokalizację</a>
+                            <a class="nav-link disabled text-muted" asp-area="" asp-page="">Zgaduj lokalizację</a>
                         </li>
                     </ul>
                 </div>

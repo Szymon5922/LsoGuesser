@@ -15,11 +15,13 @@ namespace LsoAPI
                 {
                     Content = lyric,
                     Verse = index + 1
-                })));
+                })))
+                .ForMember(dest => dest.VideoUrl, opt => opt.MapFrom(src => src.VideoUrl));
 
             CreateMap<Song, SongDto>()
                 .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Title))
-                .ForMember(dest => dest.Lines, opt => opt.MapFrom(src => src.Lines.Select(l => l.Content).ToList()));
+                .ForMember(dest => dest.Lines, opt => opt.MapFrom(src => src.Lines.Select(l => l.Content).ToList()))
+                .ForMember(dest => dest.VideoUrl, opt => opt.MapFrom(src => src.VideoUrl));
         }
     }
 }
