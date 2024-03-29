@@ -47,19 +47,20 @@
         font-size:2rem;
     }
 </style>
-
-<div class="question text-center m-5 justify-content-center">
-    Z jakiej piosenki pochodzi wers: "@Model.GuessSetModel.Question"?
+<div class="question">
+    <div class="text-center mt-5 justify-content-center">
+        Z jakiej piosenki pochodzi wers: "@Model.GuessSetModel.Question"?
+    </div>
+    <div class="row justify-content-center">
+        @foreach (var answer in Model.GuessSetModel.Answers)
+        {
+            <div class="col">
+                <button class="answer-btn" data-is-correct="@answer.IsCorrect.ToString().ToLower()">@answer.Text</button>
+            </div>
+        }
+    </div>
 </div>
-<div class="row justify-content-center">
-    @foreach (var answer in Model.GuessSetModel.Answers)
-    {
-        <div class="col">
-            <button class="answer-btn" data-is-correct="@answer.IsCorrect.ToString().ToLower()">@answer.Text</button>
-        </div>
-    }
-</div>
-<div class="row response justify-content-center">
+<div class="row response mt-5 justify-content-center">
     <div class="col text-center p-2">
         <p class="message"></p>
         <p>Prawidłowy tytuł to: "@Model.CorrectTitle"</p>
@@ -117,6 +118,10 @@
                 })
                 $(this).addClass("selected");
 
+                setTimeout(function () { 
+                    $(".question").fadeOut("slow");
+                },2000)
+
                 setTimeout(function () {
                     if (correctChoice) {
                         responsemessage = "Dobrze!"
@@ -126,7 +131,7 @@
                     }
                     $(".message").text(responsemessage);
                     $(".response").fadeIn("slow");
-                },2000)
+                },3000)
 
                 clicked = true;
             }

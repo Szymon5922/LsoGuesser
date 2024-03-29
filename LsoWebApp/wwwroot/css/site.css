@@ -65,11 +65,11 @@ main{
 }
 @media(max-width: 768px) {
     .video iframe {
-        width: 26rem; 
-        height: 14rem;        
+        width: 22rem; 
+        height: 13rem;        
     }
     html{
-        font-size:13px;
+        font-size:11px;
     }
     video {
         position: fixed;
