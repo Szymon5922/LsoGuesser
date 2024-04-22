@@ -12,6 +12,6 @@ namespace LsoAPI.Services
         GuessSet GetRandomLineGuessData(int songsToTake);
         int Create(CreateSongDto song);
         void Update(int id, CreateSongDto song);
-        bool Delete(int id);
+        void Delete(int id);
     }
 }

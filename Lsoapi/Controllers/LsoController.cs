@@ -32,7 +32,7 @@ namespace LsoAPI.Controllers
         public ActionResult<SongDto> GetSong(int id)
         {
             SongDto song = _lsoService.GetById(id);
-            return song != null ? Ok(song) : NotFound();
+            return Ok(song);
         }
         [HttpGet("SongGuess/{stt?}")]
         public ActionResult<GuessSet> GetRandomSongGuess([FromRoute] int stt=4)
@@ -55,8 +55,8 @@ namespace LsoAPI.Controllers
         [HttpDelete("{id}")]
         public ActionResult DeleteSong(int id) 
         {
-            bool isDeleted = _lsoService.Delete(id);
-            return isDeleted ? NoContent() : NotFound();
+            _lsoService.Delete(id);
+            return NoContent();
         }
     }
 }

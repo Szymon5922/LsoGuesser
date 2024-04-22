@@ -1,6 +1,7 @@
 ﻿using LsoAPI.Entities;
 using LsoAPI.Extensions;
 using LsoAPI.Models;
+using LsoAPI.Exceptions;
 using Microsoft.EntityFrameworkCore;
 
 namespace LsoAPI.GuessSets
@@ -24,6 +25,9 @@ namespace LsoAPI.GuessSets
         {
             _dbContext = dbContext;            
             _avalibleSongsIds = _dbContext.Songs.Select(p=>p.Id).ToList();
+
+            if (_avalibleSongsIds.Count > songsCountExpected)
+                throw new InsufficientDataException();
 
             HashSet<int> randSet = new();
             
