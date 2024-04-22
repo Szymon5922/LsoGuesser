@@ -2,6 +2,7 @@
 using LsoAPI.Entities;
 using LsoAPI.Models;
 using LsoAPI.GuessSets;
+using LsoAPI.Exceptions;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 
@@ -25,15 +26,15 @@ namespace LsoAPI.Services
             return song.Id;
         }
 
-        public bool Delete(int id)
+        public void Delete(int id)
         {
             Song? song = _dbContext.Songs.FirstOrDefault(p => p.Id == id);
+            
             if (song is null)
-                return false;
+                throw new SongNotFoundException();
             
             _dbContext.Songs.Remove(song);
             _dbContext.SaveChanges();
-            return true;
         }
         public SongDto GetRandom()
         {
@@ -61,6 +62,10 @@ namespace LsoAPI.Services
             Song? song = _dbContext.Songs
                 .Include(p => p.Lines)
                 .FirstOrDefault(p => p.Id == id);
+
+            if (song is null)
+                throw new SongNotFoundException();
+
             return _mapper.Map<SongDto>(song);
         }
 
